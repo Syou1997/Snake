@@ -40,6 +40,14 @@ body {
     font-size: 1.15rem;
     display: block;
     margin-top: 15px;
+    border-radius: 1rem;
+    transition: all 0.1s ease;
+}
+#start:hover{
+    transform: scale(1.03);
+}
+#start:active{
+    transform: scale(0.9);
 }
 .keyboard{
     width: 12rem;
