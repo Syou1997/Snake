@@ -81,6 +81,15 @@ body {
     left: 3.5rem;
 }
 
+/* 響應式網頁 */
+@media screen and (max-width:900px){
+
+    body .keyboard .arrow{
+        display: none;
+    }
+    
+}
+
 
 
 

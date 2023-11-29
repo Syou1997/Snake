@@ -70,7 +70,7 @@ class Fruit {
             new_x = Math.floor(Math.random() * column) * unit;
             new_y = Math.floor(Math.random() * row) * unit;
             checkOverlap(new_x, new_y);
-          } while (overlapping);
+        } while (overlapping);
 
         this.x = new_x;
         this.y = new_y;
@@ -87,22 +87,40 @@ window.addEventListener("keydown", changeDirection)
 let d = "Right"
 //按鍵盤後改變蛇的方向(方法)
 function changeDirection(e) {
+    //方向鍵變色效果
+    let keyboard = document.querySelector(".keyboard");
     if (e.key === "ArrowRight" && d !== "Left") {
         d = "Right"
+        keyboard.children[3].style.color = "orange";
+        keyboard.children[0].style.color = "white"
+        keyboard.children[1].style.color = "white"
+        keyboard.children[2].style.color = "white"
     }
     if (e.key === "ArrowDown" && d !== "Up") {
         d = "Down"
+        keyboard.children[1].style.color = "orange";
+        keyboard.children[0].style.color = "white"
+        keyboard.children[2].style.color = "white"
+        keyboard.children[3].style.color = "white"
     }
     if (e.key === "ArrowLeft" && d !== "Right") {
         d = "Left"
+        keyboard.children[2].style.color = "orange";
+        keyboard.children[0].style.color = "white"
+        keyboard.children[1].style.color = "white"
+        keyboard.children[3].style.color = "white"
     }
     if (e.key === "ArrowUp" && d !== "Down") {
         d = "Up"
+        keyboard.children[0].style.color = "orange";
+        keyboard.children[1].style.color = "white"
+        keyboard.children[2].style.color = "white"
+        keyboard.children[3].style.color = "white"
     }
 
     //每次按下上下左右鍵之後，再下一帪被畫出來之前，程式碼不接受任何keydown事件
     //這樣可以防止連續按鍵，導致蛇在邏輯上自殺
-    window.removeEventListener("keydown",changeDirection);
+    window.removeEventListener("keydown", changeDirection);
 }
 
 //剛開始的初始分數
@@ -115,13 +133,13 @@ document.getElementById("myScore2").innerHTML = "HighestScore:" + highestScore;
 
 function draw() {
     //每次畫蛇之前，確定蛇有沒有咬到自己
-    for(let i = 1; i < snake.length; i++){
+    for (let i = 1; i < snake.length; i++) {
         if (snake[i].x == snake[0].x && snake[i].y == snake[0].y) {
             clearInterval(myGame);
             alert("遊戲結束");
             return;
-          }
-        
+        }
+
     }
     //每次畫新蛇之前先用黑色背景覆蓋蛇後再畫蛇(避免原本的蛇會留在畫面上)
     ctx.fillStyle = "black";
@@ -209,16 +227,16 @@ let myGame = setInterval(draw, 100);
 //取代遊戲最高分
 function setHighestScore(score) {
     if (score > highestScore) {
-      localStorage.setItem("highestScore", score);
-      highestScore = score;
+        localStorage.setItem("highestScore", score);
+        highestScore = score;
     }
-  }
+}
 
-  //取出遊戲最高分
-  function loadHighestScore () {
-    if(localStorage.getItem("highestScore") === null){
+//取出遊戲最高分
+function loadHighestScore() {
+    if (localStorage.getItem("highestScore") === null) {
         highestScore = 0;
-    }else{
-        highestScore = Number (localStorage.getItem("highestScore"));
+    } else {
+        highestScore = Number(localStorage.getItem("highestScore"));
     }
-  }
+}
